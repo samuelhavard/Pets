@@ -30,8 +30,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.pets.data.PetsContract.PetEntry;
-import com.example.android.pets.data.PetsDbHelper;
+import com.example.android.pets.data.PetContract.PetEntry;
+import com.example.android.pets.data.PetDbHelper;
 
 
 /**
@@ -52,7 +52,7 @@ public class EditorActivity extends AppCompatActivity {
     private Spinner mGenderSpinner;
 
     /**
-     * Gender of the pet. The possible valid values are in the PetsContract.java file:
+     * Gender of the pet. The possible valid values are in the PetContract.java file:
      * {@link PetEntry#GENDER_UNKNOWN},
      * {@link PetEntry#GENDER_MALE}, or
      * {@link PetEntry#GENDER_FEMALE}.
@@ -124,7 +124,7 @@ public class EditorActivity extends AppCompatActivity {
         int weight = Integer.parseInt(weightString);
 
         // Create database helper
-        PetsDbHelper mDbHelper = new PetsDbHelper(this);
+        PetDbHelper mDbHelper = new PetDbHelper(this);
 
         // Gets the database in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();

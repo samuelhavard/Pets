@@ -26,8 +26,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.android.pets.data.PetsDbHelper;
-import com.example.android.pets.data.PetsContract.PetEntry;
+import com.example.android.pets.data.PetDbHelper;
+import com.example.android.pets.data.PetContract.PetEntry;
 
 /**
  * Displays list of pets that were entered and stored in the app.
@@ -59,7 +59,7 @@ public class CatalogActivity extends AppCompatActivity {
     private void displayDatabaseInfo() {
         // To access our database, we instantiate our subclass of SQLiteOpenHelper
         // and pass the context, which is the current activity.
-        PetsDbHelper mDbHelper = new PetsDbHelper(this);
+        PetDbHelper mDbHelper = new PetDbHelper(this);
 
         // Create and/or open a database to read from it
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
