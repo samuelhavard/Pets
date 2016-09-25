@@ -30,8 +30,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.android.pets.data.PetContract.PetEntry;
-import com.example.android.pets.data.PetDbHelper;
+import com.example.android.pets.data.PetsContract.PetEntry;
+import com.example.android.pets.data.PetsDbHelper;
+
 
 /**
  * Allows user to create a new pet or edit an existing one.
@@ -51,8 +52,9 @@ public class EditorActivity extends AppCompatActivity {
     private Spinner mGenderSpinner;
 
     /**
-     * Gender of the pet. The possible valid values are in the PetContract.java file:
-     * {@link PetEntry#GENDER_UNKNOWN}, {@link PetEntry#GENDER_MALE}, or
+     * Gender of the pet. The possible valid values are in the PetsContract.java file:
+     * {@link PetEntry#GENDER_UNKNOWN},
+     * {@link PetEntry#GENDER_MALE}, or
      * {@link PetEntry#GENDER_FEMALE}.
      */
     private int mGender = PetEntry.GENDER_UNKNOWN;
@@ -122,7 +124,7 @@ public class EditorActivity extends AppCompatActivity {
         int weight = Integer.parseInt(weightString);
 
         // Create database helper
-        PetDbHelper mDbHelper = new PetDbHelper(this);
+        PetsDbHelper mDbHelper = new PetsDbHelper(this);
 
         // Gets the database in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
