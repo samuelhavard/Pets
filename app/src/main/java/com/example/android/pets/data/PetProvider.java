@@ -7,11 +7,13 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.android.pets.data.PetContract.PetEntry;
 
 import static android.R.attr.id;
+import static android.R.attr.theme;
 
 /**
  * {@link ContentProvider} for Pets app.
@@ -124,16 +126,33 @@ public class PetProvider extends ContentProvider {
      * for that specific row in the database.
      */
     private Uri insertPet(Uri uri, ContentValues values) {
+        // Check that the name is not null
+        String name = values.getAsString(PetEntry.COLUMN_PET_NAME);
+        Integer gender = values.getAsInteger(PetEntry.COLUMN_PET_GENDER);
+        Integer weight = values.getAsInteger(PetEntry.COLUMN_PET_WEIGHT);
 
+        if (name.isEmpty()) {
+            throw new IllegalArgumentException("Pet requires a name");
+        } else if (gender == null || !PetEntry.isValidGender(gender)) {
+            throw new IllegalArgumentException("Pet requires valid gender");
+        } else if (weight != null && weight < 0) {
+            throw new IllegalArgumentException("Pet requires a valid weight");
+        }
+
+        // TODO: Finish sanity checking the rest of the attributes in ContentValues
+
+        // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        long id = database.insert(PetEntry.TABLE_NAME, null, values);
-        // Once we know the ID of the new row in the table,
-        // return the new URI with the ID appended to the end of it
 
+        // Insert the new pet with the given values
+        long id = database.insert(PetEntry.TABLE_NAME, null, values);
+        // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
         }
+
+        // Return the new URI with the ID (of the newly inserted row) appended at the end
         return ContentUris.withAppendedId(uri, id);
     }
 
