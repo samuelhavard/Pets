@@ -28,6 +28,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.pets.R;
+import com.example.android.pets.data.PetContract;
 import com.example.android.pets.data.PetContract.PetEntry;
 import com.example.android.pets.data.PetDbHelper;
 
@@ -73,9 +74,6 @@ public class CatalogActivity extends AppCompatActivity {
         // and pass the context, which is the current activity.
 //        PetDbHelper mDbHelper = new PetDbHelper(this);
 
-        // Create and/or open a database to read from it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
         // Perform this raw SQL query "SELECT * FROM pets"
         // to get a Cursor that contains all rows from the pets table.
 
@@ -87,16 +85,26 @@ public class CatalogActivity extends AppCompatActivity {
                 PetEntry.COLUMN_PET_WEIGHT
         };
 
-        Cursor cursor = db.query(
-                true,
-                PetEntry.TABLE_NAME,
-                projection,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null);
+//        Cursor cursor = db.query(
+//                true,
+//                PetEntry.TABLE_NAME,
+//                projection,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null,
+//                null);
+        Cursor cursor = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            cursor = getContentResolver().query(
+                    PetEntry.CONTENT_URI,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null);
+        }
 
         TextView displayView = (TextView) findViewById(R.id.text_view_pet);
         try {
