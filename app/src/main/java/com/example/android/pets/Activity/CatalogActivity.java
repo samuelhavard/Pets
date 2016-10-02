@@ -71,7 +71,7 @@ public class CatalogActivity extends AppCompatActivity {
         // Perform this raw SQL query "SELECT * FROM pets"
         // to get a Cursor that contains all rows from the pets table.
 
-        String[] projection ={
+        String[] projection = {
                 PetEntry._ID,
                 PetEntry.COLUMN_PET_NAME,
                 PetEntry.COLUMN_PET_BREED,
@@ -96,11 +96,11 @@ public class CatalogActivity extends AppCompatActivity {
 
 
             displayView.setText("Number of rows in pets database table: " + cursor.getCount() + "\n\n");
-            displayView.append(PetEntry._ID +  " - " +
-                    PetEntry.COLUMN_PET_NAME +  " - " +
-                    PetEntry.COLUMN_PET_BREED +  " - " +
-                    PetEntry.COLUMN_PET_GENDER +  " - " +
-                    PetEntry.COLUMN_PET_WEIGHT +  " - " +
+            displayView.append(PetEntry._ID + " - " +
+                    PetEntry.COLUMN_PET_NAME + " - " +
+                    PetEntry.COLUMN_PET_BREED + " - " +
+                    PetEntry.COLUMN_PET_GENDER + " - " +
+                    PetEntry.COLUMN_PET_WEIGHT + " - " +
                     "\n");
 
             int idColumnIndex = cursor.getColumnIndex(PetEntry._ID);

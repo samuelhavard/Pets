@@ -7,13 +7,9 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.android.pets.data.PetContract.PetEntry;
-
-import static android.R.attr.id;
-import static android.R.attr.theme;
 
 /**
  * {@link ContentProvider} for Pets app.
@@ -138,8 +134,6 @@ public class PetProvider extends ContentProvider {
         } else if (weight != null && weight < 0) {
             throw new IllegalArgumentException("Pet requires a valid weight");
         }
-
-        // TODO: Finish sanity checking the rest of the attributes in ContentValues
 
         // Get writeable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();

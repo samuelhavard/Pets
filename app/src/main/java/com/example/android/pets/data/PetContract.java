@@ -8,13 +8,14 @@ import android.provider.BaseColumns;
  */
 
 public final class PetContract {
-    private PetContract() {}
+    private PetContract() {
+    }
 
     public static final String CONTENT_AUTHORITY = "com.example.android.pets";
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
     public static final String PATH_PETS = "pets";
 
-    public static class PetEntry implements BaseColumns{
+    public static class PetEntry implements BaseColumns {
         public static final String TABLE_NAME = "pets";
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_PET_NAME = "name";
