@@ -89,7 +89,7 @@ public class CatalogActivity extends AppCompatActivity {
                     null);
         }
 
-        TextView displayView = (TextView) findViewById(R.id.text_view_pet);
+        TextView displayView = (TextView) findViewById(R.id.list_view_pet);
         try {
             // Display the number of rows in the Cursor (which reflects the number of rows in the
             // pets table in the database).
