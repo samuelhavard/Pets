@@ -174,7 +174,7 @@ public class PetProvider extends ContentProvider {
                 selectionArgs = new  String[] {String.valueOf(ContentUris.parseId(uri))};
                 return updatePet(uri, contentValues, selection, selectionArgs);
             default:
-                throw new IllegalArgumentException("Udate is not supported for " + uri);
+                throw new IllegalArgumentException("Update is not supported for " + uri);
         }
     }
 
@@ -204,7 +204,6 @@ public class PetProvider extends ContentProvider {
         if (contentValues.size() == 0) {
             return 0;
         }
-
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
         return database.update(PetEntry.TABLE_NAME, contentValues, selection, selectionArgs);
     }

@@ -52,13 +52,16 @@ public class CatalogActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        displayDatabaseInfo();
+
+        ListView petListView = (ListView) findViewById(R.id.list_view_pet);
+        View emptyView = findViewById(R.id.empty_view);
+        petListView.setEmptyView(emptyView);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        displayDatabaseInfo();
+        //displayDatabaseInfo();
     }
 
     /**
