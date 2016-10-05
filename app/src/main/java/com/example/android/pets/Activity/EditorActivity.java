@@ -60,6 +60,11 @@ public class EditorActivity extends AppCompatActivity {
     private Spinner mGenderSpinner;
 
     /**
+     *
+     */
+    private Uri mCurrentPetUri;
+
+    /**
      * Gender of the pet. The possible valid values are in the PetContract.java file:
      * {@link PetEntry#GENDER_UNKNOWN},
      * {@link PetEntry#GENDER_MALE}, or
@@ -71,6 +76,14 @@ public class EditorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        mCurrentPetUri = getIntent().getData();
+
+        if (mCurrentPetUri != null) {
+            setTitle(getString(R.string.editor_activity_title_edit_pet));
+        } else {
+            setTitle(getString(R.string.editor_activity_title_new_pet));
+        }
 
         // Find all relevant views that we will need to read user input from
         mNameEditText = (EditText) findViewById(R.id.edit_pet_name);
