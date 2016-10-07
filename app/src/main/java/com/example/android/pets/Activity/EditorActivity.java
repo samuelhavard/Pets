@@ -17,6 +17,7 @@ package com.example.android.pets.Activity;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -40,6 +41,8 @@ import android.widget.Toast;
 
 import com.example.android.pets.R;
 import com.example.android.pets.data.PetContract.PetEntry;
+
+import static android.R.attr.data;
 
 
 /**
@@ -93,10 +96,10 @@ public class EditorActivity extends AppCompatActivity implements
 
         mCurrentPetUri = getIntent().getData();
 
-        if (mCurrentPetUri != null) {
-            setTitle(getString(R.string.editor_activity_title_edit_pet));
-        } else {
+        if (mCurrentPetUri == null) {
             setTitle(getString(R.string.editor_activity_title_new_pet));
+        } else {
+            setTitle(getString(R.string.editor_activity_title_edit_pet));
             getLoaderManager().initLoader(EXISTING_PET_LOADER, null, this);
         }
 
@@ -232,8 +235,40 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
+        if(cursor == null || cursor.getCount() < 1){
+            return;
+        }
+
+        if(cursor.moveToFirst()) {
+            int nameColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_NAME);
+            int breedColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_BREED);
+            int genderColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_GENDER);
+            int weightColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_WEIGHT);
+
+            String name = cursor.getString(nameColumnIndex);
+            String breed = cursor.getString(breedColumnIndex);
+            int gender = cursor.getInt(genderColumnIndex);
+            int weight = cursor.getInt(weightColumnIndex);
+
+            mNameEditText.setText(name);
+            mBreedEditText.setText(breed);
+            mWeightEditText.setText(Integer.toString(weight));
+
+            switch (gender) {
+                case PetEntry.GENDER_MALE:
+                    mGenderSpinner.setSelection(1);
+                    break;
+                case PetEntry.GENDER_FEMALE:
+                    mGenderSpinner.setSelection(2);
+                    break;
+                default:
+                    mGenderSpinner.setSelection(0);
+                    break;
+            }
+
+        } //end if
     }
 
     @Override
