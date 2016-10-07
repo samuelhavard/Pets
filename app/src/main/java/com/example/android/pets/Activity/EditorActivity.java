@@ -237,11 +237,11 @@ public class EditorActivity extends AppCompatActivity implements
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 
-        if(cursor == null || cursor.getCount() < 1){
+        if (cursor == null || cursor.getCount() < 1) {
             return;
         }
 
-        if(cursor.moveToFirst()) {
+        if (cursor.moveToFirst()) {
             int nameColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_NAME);
             int breedColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_BREED);
             int genderColumnIndex = cursor.getColumnIndex(PetEntry.COLUMN_PET_GENDER);
@@ -267,8 +267,7 @@ public class EditorActivity extends AppCompatActivity implements
                     mGenderSpinner.setSelection(0);
                     break;
             }
-
-        } //end if
+        }
     }
 
     @Override
