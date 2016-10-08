@@ -17,14 +17,11 @@ package com.example.android.pets.Activity;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -42,8 +39,6 @@ import android.widget.Toast;
 
 import com.example.android.pets.R;
 import com.example.android.pets.data.PetContract.PetEntry;
-
-import static android.R.attr.data;
 
 
 /**
